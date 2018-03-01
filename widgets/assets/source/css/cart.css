@@ -1,0 +1,65 @@
+.cart-widget {
+    dislay: block;
+    margin:15px 0;
+}
+
+.cart-widget .cart-button-group {
+    display: block;
+    text-align: center;
+}
+
+.cart-widget .cart-button-group > * {
+    vertical-align: middle
+}
+
+.cart-widget .cart-button-group > *::selection {
+    background: none;
+    color:inherit;
+}
+
+.cart-widget .cart-buy-button, .cart .cart-submit-button {
+    display: inline-block;
+    margin-top:15px;
+    line-height: 35px;
+    border: 1px solid;
+    padding: 0 30px;
+    color: #474747;
+    font-size:21px;
+}
+
+.cart-widget .cart-button-group .cart-button, .cart .cart-button {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color:#fff;
+    background: #fb9d8f;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:18px;
+}
+
+
+.cart-widget .cart-button-group .cart-input, .cart .cart-input {
+    border:1px solid #fb9d8f;
+    text-align:center;
+    line-height: 25px;
+    height:25px;
+    box-sizing: border-box;
+    outline:none;
+    font-size:18px;
+}
+
+.cart-widget .cart-button-group .cart-input:focus,  .cart .cart-input:focus {
+    background: #fff3f3;
+}
+
+.cart table th, .cart table td  {
+    vertical-align: middle;
+}
+
+.cart table td.img {
+    padding-top:0;
+    padding-bottom:0;
+}
