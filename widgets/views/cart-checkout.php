@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 
 <div class="cart">
 
-    <?php $form = ActiveForm::begin(['id' => 'checkout-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'checkout-form','options' => ['data-pjax' => 1]]); ?>
 
         <?= $form->field($model, 'contactName') ?>
 
@@ -24,8 +24,8 @@ use yii\widgets\ActiveForm;
 
 
         <div class="uk-form-row uk-text-center">
-            <?= Html::submitButton('Вернуться назад', ['class' => 'cart-back-button']) ?>
-            <?= Html::submitButton('Оформить', ['class' => 'cart-checkout-button']) ?>
+            <?= Html::submitButton('Вернуться назад', ['class' => 'cart-submit-button','name'=>'back','value'=>'true']) ?>
+            <?= Html::submitButton('Оформить', ['class' => 'cart-submit-button']) ?>
         </div>
 
         <?= Html::hiddenInput('checkout', 'true'); ?>

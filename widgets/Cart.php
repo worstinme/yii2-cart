@@ -17,8 +17,7 @@ class Cart extends \yii\base\Widget
     public function run()
     {
 
-        if (Yii::$app->request->post('checkout') == 'true') {
-
+        if (Yii::$app->request->post('back') === null && Yii::$app->request->post('checkout') == 'true') {
 
             $class = Yii::$app->cart->orderModel;
 
@@ -66,7 +65,7 @@ class Cart extends \yii\base\Widget
 
         }
 
-        if (Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost && Yii::$app->request->post('back') === null) {
             if (Yii::$app->cart->add(Yii::$app->request->post())) {
                 Yii::$app->cart->save();
             }

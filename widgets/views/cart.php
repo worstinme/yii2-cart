@@ -44,7 +44,7 @@ use yii\helpers\Html;
     <?php if (Yii::$app->cart->total >= Yii::$app->cart->min_sum_to_order): ?>
         <?php $form = ActiveForm::begin(['options' => ['data-pjax' => 1]]); ?>
         <p class="uk-text-center">
-            <?= Html::a('Продолжить', '/', ['class' => 'cart-submit-button', 'data' => ['pjax' => true, 'method' => 'post', 'params' => ['checkout' => 'true']]]); ?>
+            <?= Html::submitButton('Продолжить', ['name'=>'checkout','value'=>'true', 'class' => 'cart-submit-button']); ?>
         </p>
         <?php ActiveForm::end(); ?>
     <?php else: ?>
