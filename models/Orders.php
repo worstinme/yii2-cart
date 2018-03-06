@@ -35,6 +35,7 @@ class Orders extends \yii\db\ActiveRecord
         return [
             [['state', 'paid'], 'integer'],
             [$this->jsonParams,'string'],
+            [['email','phone','address'],'required'],
             ['params','safe'],
             ['email','email'],
         ];
@@ -51,7 +52,7 @@ class Orders extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'state' => 'State',
-            'adress' => 'Адрес',
+            'address' => 'Адрес',
             'body' => 'Сообщение',
             'contactName' => 'Контактное лицо',
             'email' => 'Электронная почта',
