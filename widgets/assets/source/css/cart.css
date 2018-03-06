@@ -25,6 +25,8 @@
     padding: 0 30px;
     color: #474747;
     font-size:21px;
+    background: none;
+    cursor: pointer;
 }
 
 .cart-widget .cart-button-group .cart-button, .cart .cart-button {
