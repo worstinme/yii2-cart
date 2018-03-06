@@ -12,7 +12,8 @@ use worstinme\cart\models\CartOrders;
  */
 class OrdersSearch extends Orders
 {
-    public $orderModel = 'Orders';
+    public $orderModel;
+
     /**
      * @inheritdoc
      */
@@ -50,7 +51,7 @@ class OrdersSearch extends Orders
      */
     public function search($params)
     {
-        $class = $this->orderModel;
+        $class = Yii::$app->cart->orderModel;
 
         $query = $class::find();
 
@@ -59,7 +60,7 @@ class OrdersSearch extends Orders
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=>[
-                'defaultOrder'=>['updated_at' => SORT_DESC],   
+                'defaultOrder'=>['created_at' => SORT_DESC],
             ], 
         ]);
 

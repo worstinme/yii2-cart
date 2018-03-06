@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 class AdminController extends Controller
 {
     public $access = ['admin'];
-    public $orderModel = '\worstinme\cart\models\Orders';
+
     /**
      * @inheritdoc
      */
@@ -70,12 +70,12 @@ class AdminController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            Yii::$app->session->setFlash('success','Ствтус заказа обновлён');
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -100,7 +100,7 @@ class AdminController extends Controller
      */
     protected function findModel($id)
     {   
-        $order = $this->orderModel;
+        $order = Yii::$app->cart->orderModel;
         
         if (($model = $order::findOne($id)) !== null) {
             return $model;

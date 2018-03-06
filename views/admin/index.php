@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use worstinme\uikit\Breadcrumbs;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -16,10 +15,10 @@ Pjax::begin(['id'=>'cart-orders','timeout'=>5000,'options'=>['data-uk-observe'=>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'summaryOptions'=>['class'=>'uk-text-center'],
-    'tableOptions'=> ['class' => 'uk-table uk-form uk-table-condensed uk-table-hover uk-table-striped uk-table-bordered uk-margin-top'],
+    'tableOptions'=> ['class' => 'uk-table uk-form uk-table-small uk-table-condensed uk-table-hover uk-table-striped uk-margin-top'],
     'options'=> ['class' => 'items'],
     'layout' => '{items}{pager}',
-    'pager' => ['class'=> 'worstinme\uikit\widgets\LinkPager'],
+    'pager' => ['options'=>['class'=>'uk-pagination']],
     'columns' => [
         [
             'attribute'=>'id',
@@ -30,7 +29,7 @@ Pjax::begin(['id'=>'cart-orders','timeout'=>5000,'options'=>['data-uk-observe'=>
         [
             'format'=>'raw',
             'value' => function ($model, $index, $widget) {
-                return Html::a('<i class="uk-icon-file-text"></i>', ['update','id'=>$model->id],['data-pjax'=>0]);
+                return Html::a('<i uk-icon="folder"></i>', ['update','id'=>$model->id],['data-pjax'=>0]);
             },
             'headerOptions'=>['class'=>'uk-text-center'],
             'contentOptions'=>['class'=>'uk-text-center'],
@@ -56,12 +55,13 @@ Pjax::begin(['id'=>'cart-orders','timeout'=>5000,'options'=>['data-uk-observe'=>
             'label'=>'Статус заказа',
             'format' => 'raw',
             'value' => function ($model, $index, $widget) {
-                return !empty($model::$states[$model->state]) ? $model::$states[$model->state] : $model->state;
+                return !empty(Yii::$app->cart->states[$model->state]) ? Yii::$app->cart->states[$model->state] : $model->state;
             },
             'headerOptions'=>['class'=>'uk-text-center'],
             'contentOptions'=>['class'=>'uk-text-center'],
         ],
         [
+            'format' => 'raw',
             'label'=>'Сумма',
             'value' => function ($model, $index, $widget) {
                 return Yii::$app->formatter->asCurrency($model->sum);

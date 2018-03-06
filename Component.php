@@ -40,6 +40,11 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     public $relationCategoryField = 'category';
 
+    public $states = [
+        'Новый',
+        'Выполнен',
+    ];
+
     public function init() {
 
         $cartCookies = Yii::$app->request->cookies->getValue('cart');

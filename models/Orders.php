@@ -7,17 +7,6 @@ use yii\helpers\Json;
 
 class Orders extends \yii\db\ActiveRecord
 {
-    
-    public static $states = [
-        'Новый',
-        'Выполнен',
-    ];
-
-    public static $paids = [
-        'Не оплачен',
-        'Оплачен',
-    ];
-
     public $emailSubject = 'Заказ с сайта';
     public $adminEmailSubject = 'Заказ с сайта';
 
