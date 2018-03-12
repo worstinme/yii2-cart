@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use worstinme\uikit\Breadcrumbs;
 
-$this->registerJs('$.pjax.defaults.scrollTo = false', $this::POS_READY);
 $this->title = 'Ваш заказ';
 
 $this->params['breadcrumbs'][] = $this->title;

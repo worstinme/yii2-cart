@@ -9,6 +9,7 @@ $relation_image = ArrayHelper::getValue($item->model, Yii::$app->cart->relationI
 $relation_category = ArrayHelper::getValue($item->model, Yii::$app->cart->relationCategoryField);
 
 ?>
+
 <tr>
     <td class="img">
         <?php if ($relation_image): ?>
@@ -36,7 +37,7 @@ $relation_category = ArrayHelper::getValue($item->model, Yii::$app->cart->relati
         <?php endif ?>
     </td>
     <td class="uk-text-center count">
-        <?= Html::textInput('count', $item->count, ['size' => 1,'class'=>'cart-input','data' => ['count' => $item->count]]); ?>
+        <?= Html::textInput('count', $item->count, ['size' => 1, 'class' => 'cart-input', 'data' => ['count' => $item->count]]); ?>
         <?= Html::a('Save', ['index'], ['class' => 'cart-button-save  uk-hidden', 'data' => [
             'method' => 'post', 'pjax' => true,
             'params' => ['item_id' => $item->item_id, 'relation' => $item->relation, 'count' => 0,],

@@ -5,7 +5,6 @@ use yii\helpers\Url;
 use worstinme\uikit\Breadcrumbs;
 use worstinme\uikit\ActiveForm;
 
-$this->registerJs('$.pjax.defaults.scrollTo = false', $this::POS_READY);
 $this->title = 'Заказ оформлен';
 
 $this->params['breadcrumbs'][] = 'Заказ оформлен';
