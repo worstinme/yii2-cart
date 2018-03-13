@@ -27,16 +27,18 @@ $js = <<<JS
 
 $(document)
     .on("click", ".cart-widget [data-minus]",function(e){
+        e.preventDefault();
         var input = $(this).parent("div").find("[name='count']");
         var val = Number(input.val()) - 1;
         if (val < 1) { val = 1; }
         input.val(val);
-        e.preventDefault();
+        console.log('-1');
     })
     .on("click",".cart-widget [data-plus]",function(e){
+        e.preventDefault();
         var input = $(this).parent("div").find("[name='count']");
         input.val(Number(input.val()) + 1);
-        e.preventDefault();
+        console.log('+1');
     })
     .on("click", ".cart-widget .cart-buy-button", function(e) {
         var widget = $(this).parents(".cart-widget"),
@@ -64,4 +66,8 @@ $(document)
 
 JS;
 
+if (!Yii::$app->request->isPjax) {
+
 $this->registerJs($js, $this::POS_READY);
+
+}
