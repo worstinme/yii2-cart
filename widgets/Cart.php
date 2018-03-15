@@ -6,6 +6,9 @@ use Yii;
 
 class Cart extends \yii\base\Widget
 {
+    public $senderEmail = 'example@example.com';
+    public $adminEmail = 'example@example.com';
+
     public function init()
     {
         if (!Yii::$app->request->isAjax) {
@@ -33,15 +36,15 @@ class Cart extends \yii\base\Widget
                 Yii::$app->cart->close();
 
                 Yii::$app->mailer->compose('@worstinme/cart/mail/checkout', ['order' => $model])
-                    ->setFrom(Yii::$app->params['senderEmail'])
-                    ->setTo(Yii::$app->params['adminEmail'])
+                    ->setFrom($this->senderEmail)
+                    ->setTo($this->adminEmail)
                     ->setSubject($model->adminEmailSubject)
                     ->send();
 
                 if (!empty($model->email)) {
 
                     $mailer = Yii::$app->mailer->compose('@worstinme/cart/mail/checkout', ['order' => $model])
-                        ->setFrom($from)
+                        ->setFrom($this->senderEmail)
                         ->setTo($model->email)
                         ->setSubject($model->emailSubject);
 
