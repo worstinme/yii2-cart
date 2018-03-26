@@ -42,7 +42,7 @@ $(document)
     })
     .on("click", ".cart-widget .cart-buy-button", function(e) {
         var widget = $(this).parents(".cart-widget"),
-            count = $(this).parents().find("[name='count']").val(), 
+            count = $(this).parents(".cart-widget").find("[name='count']").val(), 
             relation = $(this).data("relation"), 
             price = $(this).data("price"), 
             item_id = $(this).data("item_id");
