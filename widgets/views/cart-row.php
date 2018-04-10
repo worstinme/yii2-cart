@@ -30,7 +30,7 @@ $relation_category = ArrayHelper::getValue($item->model, Yii::$app->cart->relati
     </td>
     <td class="uk-text-right">
         <?php if ($item->count > 1): ?>
-            <?= Html::a('-', ['index'], ['class' => 'cart-button', 'data' => [
+            <?= Html::a('-', '', ['class' => 'cart-button', 'data' => [
                 'method' => 'post', 'pjax' => true,
                 'params' => ['item_id' => $item->item_id, 'relation' => $item->relation, 'count' => -1,],
             ]]); ?>
@@ -38,20 +38,20 @@ $relation_category = ArrayHelper::getValue($item->model, Yii::$app->cart->relati
     </td>
     <td class="uk-text-center count">
         <?= Html::textInput('count', $item->count, ['size' => 1, 'class' => 'cart-input', 'data' => ['count' => $item->count]]); ?>
-        <?= Html::a('Save', ['index'], ['class' => 'cart-button-save  uk-hidden', 'data' => [
+        <?= Html::a('Save', '', ['class' => 'cart-button-save  uk-hidden', 'data' => [
             'method' => 'post', 'pjax' => true,
             'params' => ['item_id' => $item->item_id, 'relation' => $item->relation, 'count' => 0,],
         ]]); ?>
     </td>
     <td>
-        <?= Html::a('+', ['index'], ['class' => 'cart-button', 'data' => [
+        <?= Html::a('+', '', ['class' => 'cart-button', 'data' => [
             'method' => 'post', 'pjax' => true,
             'params' => ['item_id' => $item->item_id, 'relation' => $item->relation, 'count' => 1,],
         ]]); ?>
     </td>
     <td class="uk-text-right price"><b><?= Yii::$app->formatter->asCurrency($item->sum) ?></b></td>
     <td class="uk-text-center">
-        <?= Html::a('X', ['index'],
+        <?= Html::a('X', '',
             ['data' => [
                 'method' => 'post', 'pjax' => true,
                 'confirm' => 'Уверены что хотите убрать товар из заказа?',

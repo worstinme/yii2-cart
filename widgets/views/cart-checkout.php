@@ -30,6 +30,6 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
-    <?= Html::a('Вернуться назад', ['data-pjax' => 1, 'class' => 'cart-submit-button', 'name' => 'back', 'value' => 'true']) ?>
+    <?= Html::a('Вернуться назад','', ['data-pjax' => 1, 'class' => 'cart-submit-button', 'name' => 'back', 'value' => 'true']) ?>
 
 </div>
