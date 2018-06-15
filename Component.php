@@ -21,6 +21,10 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     public $min_sum_to_order = 500;
 
+    public $checkout_email_template = '@worstinme/cart/mail/checkout'
+
+    public $checkout_client_email_template = '@worstinme/cart/mail/checkout';
+
     /** @var array The rules to be used in URL management. */
     public $urlRules = [
         'cart/<action:(\w|-)+>' => 'cart/<action>',

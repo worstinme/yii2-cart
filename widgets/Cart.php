@@ -35,7 +35,7 @@ class Cart extends \yii\base\Widget
 
                 Yii::$app->cart->close();
 
-                Yii::$app->mailer->compose('@worstinme/cart/mail/checkout', ['order' => $model])
+                Yii::$app->mailer->compose(Yii::$app->zoo->checkout_email_template, ['order' => $model])
                     ->setFrom($this->senderEmail)
                     ->setTo($this->adminEmail)
                     ->setSubject($model->adminEmailSubject)
@@ -43,7 +43,7 @@ class Cart extends \yii\base\Widget
 
                 if (!empty($model->email)) {
 
-                    $mailer = Yii::$app->mailer->compose('@worstinme/cart/mail/checkout', ['order' => $model])
+                    $mailer = Yii::$app->mailer->compose(Yii::$app->zoo->checkout_client_email_template, ['order' => $model])
                         ->setFrom($this->senderEmail)
                         ->setTo($model->email)
                         ->setSubject($model->emailSubject);
