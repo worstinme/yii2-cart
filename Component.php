@@ -21,7 +21,7 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     public $min_sum_to_order = 500;
 
-    public $checkout_email_template = '@worstinme/cart/mail/checkout'
+    public $checkout_email_template = '@worstinme/cart/mail/checkout';
 
     public $checkout_client_email_template = '@worstinme/cart/mail/checkout';
 
