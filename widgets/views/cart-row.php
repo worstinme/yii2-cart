@@ -41,7 +41,7 @@ $relation_category = ArrayHelper::getValue($item->model, Yii::$app->cart->relati
                 'params' => ['item_id' => $item->item_id, 'relation' => $item->relation, 'count' => 0,],
             ]]); ?>
         </div>
-        <?= Html::a('+', '#cart-pjax', ['class' => 'cart-button', 'data' => [
+        <?= Html::a('+', '', ['class' => 'cart-button', 'data' => [
             'method' => 'post', 'pjax' => true,
             'params' => ['item_id' => $item->item_id, 'relation' => $item->relation, 'count' => 1,],
         ]]); ?>
