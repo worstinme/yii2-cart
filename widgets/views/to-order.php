@@ -11,13 +11,7 @@ use yii\helpers\Url;
             --><a class="uk-hidden-small cart-button" data-plus>+</a>
         </div>
 
-        <?= Html::a($label, $url = null, ['class' => 'cart-buy-button',
-            'data' => [
-                'item_id' => $id,
-                'relation' => 0,
-                'price' => $price
-            ]
-        ]); ?>
+        <?= Html::a($label, $url = null,$options); ?>
 
     </div>
 

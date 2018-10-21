@@ -9,9 +9,8 @@ use \yii\widgets\Pjax;
     <div class="cart">
         <?php Pjax::begin(['id' => 'cart-pjax']) ?>
 
-
         <?php if (count(Yii::$app->cart->items) <= 0): ?>
-            <div class="uk-text-center empty-cart">Ваш заказ пуст.</div>
+            <div class="uk-text-center empty-cart"><?=Yii::t('cart','YOUR_CART_IS_EMPTY')?></div>
         <?php else: ?>
 
             <?php ActiveForm::begin() ?>
@@ -24,15 +23,14 @@ use \yii\widgets\Pjax;
             </div>
             <?php ActiveForm::end() ?>
 
-            <div class="cart__sum"><span>Сумма заказа:</span> <?= Yii::$app->cart->sum ?></div>
+            <div class="cart__sum"><span><?=Yii::t('cart','ORDER_TOTAL')?>:</span> <?= Yii::$app->cart->sum ?></div>
 
             <?php if (Yii::$app->cart->total >= Yii::$app->cart->min_sum_to_order): ?>
                 <p class="uk-text-center">
-                    <?= Html::a('Продолжить', '', ['data' => ['method' => 'post', 'params' => ['checkout' => 'true']], 'class' => 'cart-submit-button']); ?>
+                    <?= Html::a(Yii::t('cart','ORDER_CHECKOUT_BUTTON'), '', ['data' => ['method' => 'post', 'params' => ['checkout' => 'true']], 'class' => 'cart-submit-button']); ?>
                 </p>
             <?php else: ?>
-                <p class="uk-text-center">Минимальная сумма
-                    заказа: <?= Yii::$app->formatter->asCurrency(Yii::$app->cart->min_sum_to_order) ?></p>
+                <p class="uk-text-center"><?=Yii::t('cart','MIN_ORDER_SUM')?>: <?= Yii::$app->formatter->asCurrency(Yii::$app->cart->min_sum_to_order) ?></p>
             <?php endif ?>
 
         <?php endif ?>

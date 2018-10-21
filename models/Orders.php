@@ -5,6 +5,11 @@ namespace worstinme\cart\models;
 use Yii;
 use yii\helpers\Json;
 
+/**
+ * Class Orders
+ *
+ * @property string $token
+ */
 class Orders extends \yii\db\ActiveRecord
 {
     public $emailSubject = 'Заказ с сайта';
@@ -106,25 +111,20 @@ class Orders extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-
-
-        if (parent::beforeSave($insert)) {
-
-            if (!Yii::$app->user->isGuest && $insert) {
+        if ($insert) {
+            if (!Yii::$app->user->isGuest) {
                 $this->user_id = Yii::$app->user->identity->id;
             }
-            
-            return true;
-        } else {
-            return false;
+            $this->token = Yii::$app->security->generateRandomString();
         }
+
+        return parent::beforeSave($insert);
     }
 
 
     public function afterDelete()
     {
         Yii::$app->db->createCommand()->delete('{{%orders_items}}', ['order_id'=>$this->id])->execute();
-
         parent::afterDelete();
         
     }

@@ -38,6 +38,8 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     public $checkoutAccess =  ['?'];
 
+    public $orderRoute = [];
+
     public $relationNameField = 'name';
 
     public $relationImageField = 'image';
@@ -45,8 +47,8 @@ class Component extends \yii\base\Component implements BootstrapInterface
     public $relationCategoryField = 'category';
 
     public $states = [
-        'Новый',
-        'Выполнен',
+        'new',
+        'done',
     ];
 
     public function init() {
@@ -72,6 +74,14 @@ class Component extends \yii\base\Component implements BootstrapInterface
                 'class' => 'worstinme\cart\controllers\CartController',
                 'checkoutAccess'=>$this->checkoutAccess,
             ];
+
+            if (!isset($app->get('i18n')->translations['cart*'])) {
+                $app->get('i18n')->translations['cart*'] = [
+                    'class' => PhpMessageSource::className(),
+                    'basePath' => '@worstinme/cart/messages',
+                    'sourceLanguage' => 'en-US'
+                ];
+            }
 
             $app->urlManager->addRules($this->urlRules, false);
 

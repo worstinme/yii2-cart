@@ -3,6 +3,8 @@
 namespace worstinme\cart\widgets;
 
 use Yii;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class Cart extends \yii\base\Widget
 {
@@ -49,8 +51,19 @@ class Cart extends \yii\base\Widget
                         ->setSubject($model->emailSubject);
 
                     if ($mailer->send()) {
-                        Yii::$app->getSession()->setFlash('success', 'Спасибо! Ваш заказ отправлен.');
+                        Yii::$app->getSession()->setFlash('success', Yii::t('cart','SUCCESS_CHECKOUT'));
                     }
+
+                }
+
+                if (($orderRoute = Yii::$app->cart->orderRoute) !== null) {
+                    $orderRoute['id'] = $model->id;
+                    Yii::$app->response->cookies->add(new \yii\web\Cookie([
+                        'name' => 'order-'.$model->id,
+                        'value' => $model->token,
+                    ]));
+                    Yii::$app->response->redirect($orderRoute);
+                    Yii::$app->end();
 
                 }
 
