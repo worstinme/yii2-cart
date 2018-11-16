@@ -24,6 +24,7 @@ class Component extends \yii\base\Component implements BootstrapInterface
     public $checkout_email_template = '@worstinme/cart/mail/checkout';
 
     public $checkout_client_email_template = '@worstinme/cart/mail/checkout';
+    public $delivered_email_template = '@worstinme/cart/mail/checkout';
 
     /** @var array The rules to be used in URL management. */
     public $urlRules = [
@@ -47,9 +48,15 @@ class Component extends \yii\base\Component implements BootstrapInterface
     public $relationCategoryField = 'category';
 
     public $states = [
-        'new',
-        'done',
+        0=>'New',
+        1=>'Waiting for payment',
+        2=>'Processing',
+        3=>'Delivery awaiting',
+        4=>'Failed to deliver',
+        5=>'Delivered',
     ];
+
+    public $sendAdminCheckoutEmail = true;
 
     public function init() {
 

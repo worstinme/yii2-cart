@@ -69,8 +69,20 @@ class AdminController extends Controller
     {
         $model = $this->findModel($id);
 
+        $stateBefore = $model->state;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success','Ствтус заказа обновлён');
+        }
+
+        if ($model->state == 5 && $stateBefore != $model->state) {
+
+            Yii::$app->mailer->compose(Yii::$app->cart->delivered_email_template,['order'=>$model])
+                ->setTo($model->email)
+                ->setFrom(Yii::$app->params['senderEmail'])
+                ->setSubject('Completed order')
+                ->send();
+
         }
 
         return $this->render('update', [

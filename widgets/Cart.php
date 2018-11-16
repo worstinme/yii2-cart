@@ -37,11 +37,15 @@ class Cart extends \yii\base\Widget
 
                 Yii::$app->cart->close();
 
-                Yii::$app->mailer->compose(Yii::$app->cart->checkout_email_template, ['order' => $model])
-                    ->setFrom($this->senderEmail)
-                    ->setTo($this->adminEmail)
-                    ->setSubject($model->adminEmailSubject)
-                    ->send();
+                if (Yii::$app->cart->sendAdminCheckoutEmail) {
+
+                    Yii::$app->mailer->compose(Yii::$app->cart->checkout_email_template, ['order' => $model])
+                        ->setFrom($this->senderEmail)
+                        ->setTo($this->adminEmail)
+                        ->setSubject($model->adminEmailSubject)
+                        ->send();
+
+                }
 
                 if (!empty($model->email)) {
 

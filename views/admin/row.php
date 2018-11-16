@@ -11,21 +11,22 @@ $relation_category = ArrayHelper::getValue($item->model, Yii::$app->cart->relati
 
 
 <tr>
-    <td class="img">
-        <?php if ($relation_image): ?>
-            <?= Html::img($relation_image) ?>
-        <?php endif ?>
-    </td>
-    <td class="category">
-        <?php if ($relation_category): ?>
-            <?= $relation_category ?>
-        <?php endif ?>
+
+    <?php if ($relation_image): ?>
+    <td class="img" width="60">
+        <?= Html::img($relation_image) ?>
     </td>
     <td class="itemid">
+    <?php else : ?>
+    <td class="itemid" colspan="2">
+    <?php endif ?>
         <?php if ($relation_name): ?>
             <?= $relation_name ?>
         <?php else: ?>
             <?= $item->item_id ?>
+        <?php endif ?>
+        <?php if ($relation_category): ?>
+            (<?= $relation_category ?>)
         <?php endif ?>
     </td>
     <td class="uk-text-center count"><?= $item->count ?></td>

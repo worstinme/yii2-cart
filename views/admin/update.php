@@ -17,10 +17,10 @@ $this->params['breadcrumbs'][] = 'Заказ #' . $model->id;
 <div class="cart cart-orders">
 
     <div class="uk-overflow-container">
-        <table class="uk-table uk-form uk-table-small uk-table-condensed uk-table-hover uk-table-striped uk-margin-top">
+        <table class="uk-table uk-form uk-table-small uk-table-middle uk-table-condensed uk-table-hover uk-table-striped uk-margin-top">
             <thead>
             <tr>
-                <td colspan="3">Наименование</td>
+                <td colspan="2">Наименование</td>
                 <td class="uk-text-center">Количество</td>
                 <td class="uk-text-right">Сумма</td>
             </tr>
@@ -36,12 +36,9 @@ $this->params['breadcrumbs'][] = 'Заказ #' . $model->id;
 
                 <tfoot>
                 <tr>
-                    <td class="uk-hidden-small uk-text-center">
-                        <?php $form = ActiveForm::begin() ?>
-                        <?= Html::activeDropDownList($model, 'state',Yii::$app->cart->states, ['class' => 'uk-select','onchange'=>'$(this).parents("form").submit()']) ?>
-                        <?php ActiveForm::end() ?>
+                    <td class="uk-hidden-small uk-text-right" colspan="2">
+                        Итого:
                     </td>
-                    <td class="uk-text-right" colspan="2">Итого:</td>
                     <td class="uk-text-center"><?= $model->amount ?></td>
                     <td class="uk-text-right"><b
                                 style="font-style: normal;"><?= Yii::$app->formatter->asCurrency($model->sum) ?></b>
@@ -52,6 +49,18 @@ $this->params['breadcrumbs'][] = 'Заказ #' . $model->id;
             <?php endif ?>
         </table>
     </div>
+
+
+    <?php $form = ActiveForm::begin(['options' => ['class'=>'uk-form uk-margin']]) ?>
+    <div class="uk-grid" uk-grid>
+        <div class="uk-width-2-3@m">
+            <?= Html::activeDropDownList($model, 'state',Yii::$app->cart->states, ['class' => 'uk-select','onchange'=>'$(this).parents("form").submit()']) ?>
+        </div>
+        <div class="uk-width-1-3@m">
+            <?= Html::activeDropDownList($model, 'paid',['NOT PAID', 'PAID', 'WAITING'], ['class' => 'uk-select','onchange'=>'$(this).parents("form").submit()']) ?>
+        </div>
+    </div>
+    <?php ActiveForm::end() ?>
 
     <div class="uk-panel uk-panel-box" style="padding: 0">
         <ul class="uk-list uk-list-striped">

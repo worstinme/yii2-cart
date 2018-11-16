@@ -9,6 +9,8 @@ use yii\helpers\Json;
  * Class Orders
  *
  * @property string $token
+ * @property int $amount
+ * @property int $sum
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -115,7 +117,9 @@ class Orders extends \yii\db\ActiveRecord
             if (!Yii::$app->user->isGuest) {
                 $this->user_id = Yii::$app->user->identity->id;
             }
-            $this->token = Yii::$app->security->generateRandomString();
+            if ($this->token === null) {
+                $this->token = Yii::$app->security->generateRandomString();
+            }
         }
 
         return parent::beforeSave($insert);
