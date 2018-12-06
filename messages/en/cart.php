@@ -7,4 +7,5 @@
     'ORDER_PAYMENT'=>'Payment',
     'CHECKOUT_BACK_TO_CART'=>'Edit ordered items',
     'CHECKOUT_CONFIRM_BUTTON'=>'Confirm',
+    'SUCCESS_CHECKOUT'=>'Order was successefully created',
 ];
