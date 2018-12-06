@@ -73,7 +73,18 @@ class Orders extends \yii\db\ActiveRecord
     }
 
     public function getSum() {
-        return OrdersItems::find()->where(['order_id'=>$this->id])->sum('price*count');
+        return round(OrdersItems::find()->where(['order_id'=>$this->id])->sum('price*count'),2);
+    }
+
+    public function getTaxes() {
+        if (Yii::$app->cart->tax > 0) {
+            return round($this->sum * Yii::$app->cart->tax / 100,2);
+        }
+        return 0;
+    }
+
+    public function getTotal() {
+        return $this->sum + $this->taxes;
     }
 
     public function getAmount() {

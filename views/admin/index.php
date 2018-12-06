@@ -64,7 +64,7 @@ Pjax::begin(['id'=>'cart-orders','timeout'=>5000,'options'=>['data-uk-observe'=>
             'format' => 'raw',
             'label'=>'Сумма',
             'value' => function ($model, $index, $widget) {
-                return Yii::$app->formatter->asCurrency($model->sum);
+                return Yii::$app->formatter->asCurrency($model->total);
             },
             'headerOptions'=>['class'=>'uk-text-right'],
             'contentOptions'=>['class'=>'uk-text-right'],

@@ -47,6 +47,12 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     public $relationCategoryField = 'category';
 
+    /**
+     * Taxes in percentage
+     * @var int
+     */
+    public $tax = 0;
+
     public $states = [
         0=>'New',
         1=>'Waiting for payment',
@@ -141,11 +147,23 @@ class Component extends \yii\base\Component implements BootstrapInterface
         return Yii::$app->response->cookies->add(new \yii\web\Cookie(['name'=>'cart','value'=>$items]));
     }
 
-    public function getTotal() {
+    public function getDutyFreeTotal() {
         $sum = 0;
         foreach ($this->items as $item) $sum += $item->price*$item->count;
         return round($sum,2);
     }
+
+    public function getTotal() {
+        return $this->dutyFreeTotal + $this->taxes;
+    }
+
+    public function getTaxes() {
+        if ($this->tax > 0) {
+            return round($this->dutyFreeTotal * $this->tax / 100,2);
+        }
+        return 0;
+    }
+
 
     public function getSum() {
         return Yii::$app->formatter->asCurrency($this->total);

@@ -37,11 +37,20 @@ $this->params['breadcrumbs'][] = 'Заказ #' . $model->id;
                 <tfoot>
                 <tr>
                     <td class="uk-hidden-small uk-text-right" colspan="2">
+                        Subtotal + taxes:
+                    </td>
+                    <td class="uk-text-right"><?= Yii::$app->formatter->asCurrency($model->sum) ?></td>
+                    <td class="uk-text-right"><b
+                                style="font-style: normal;"><?= Yii::$app->formatter->asCurrency($model->taxes) ?></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="uk-hidden-small uk-text-right" colspan="2">
                         Итого:
                     </td>
                     <td class="uk-text-center"><?= $model->amount ?></td>
                     <td class="uk-text-right"><b
-                                style="font-style: normal;"><?= Yii::$app->formatter->asCurrency($model->sum) ?></b>
+                                style="font-style: normal;"><?= Yii::$app->formatter->asCurrency($model->total) ?></b>
                     </td>
                 </tr>
                 </tfoot>
