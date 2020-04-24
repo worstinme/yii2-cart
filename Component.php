@@ -37,7 +37,7 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     public $orderModel = '\worstinme\cart\models\Orders';
 
-    public $checkoutAccess =  ['?'];
+    public $checkoutAccess = ['?'];
 
     public $orderRoute = [];
 
@@ -52,24 +52,26 @@ class Component extends \yii\base\Component implements BootstrapInterface
      * @var int
      */
     public $tax = 0;
+    public $taxIncluded = true;
 
     public $states = [
-        0=>'New',
-        1=>'Waiting for payment',
-        2=>'Processing',
-        3=>'Delivery awaiting',
-        4=>'Failed to deliver',
-        5=>'Delivered',
+        0 => 'New',
+        1 => 'Waiting for payment',
+        2 => 'Processing',
+        3 => 'Delivery awaiting',
+        4 => 'Failed to deliver',
+        5 => 'Delivered',
     ];
 
     public $sendAdminCheckoutEmail = true;
 
-    public function init() {
+    public function init()
+    {
 
         $cartCookies = Yii::$app->request->cookies->getValue('cart');
 
         if (is_array($cartCookies)) {
-            foreach($cartCookies as $item) {
+            foreach ($cartCookies as $item) {
                 $this->add($item);
             }
         }
@@ -85,7 +87,7 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
             $app->controllerMap['cart'] = [
                 'class' => 'worstinme\cart\controllers\CartController',
-                'checkoutAccess'=>$this->checkoutAccess,
+                'checkoutAccess' => $this->checkoutAccess,
             ];
 
             if (!isset($app->get('i18n')->translations['cart*'])) {
@@ -102,7 +104,8 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     }
 
-    public function add($data) {
+    public function add($data)
+    {
 
         $item = new OrdersItems();
 
@@ -127,7 +130,8 @@ class Component extends \yii\base\Component implements BootstrapInterface
 
     }
 
-    public function close() {
+    public function close()
+    {
         return Yii::$app->response->cookies->remove('cart');
     }
 
@@ -135,43 +139,63 @@ class Component extends \yii\base\Component implements BootstrapInterface
     {
         $items = [];
 
-        foreach ($this->items as $key=> $item) {
+        foreach ($this->items as $key => $item) {
             if ($item->count > 0) {
                 $items[] = $item->attributes;
-            }
-            else {
+            } else {
                 unset($this->items[$key]);
             }
         }
 
-        return Yii::$app->response->cookies->add(new \yii\web\Cookie(['name'=>'cart','value'=>$items]));
+        return Yii::$app->response->cookies->add(new \yii\web\Cookie(['name' => 'cart', 'value' => $items]));
     }
 
-    public function getDutyFreeTotal() {
+    public function getDutyFreeTotal()
+    {
         $sum = 0;
-        foreach ($this->items as $item) $sum += $item->price*$item->count;
-        return round($sum,2);
+        foreach ($this->items as $item) {
+            $sum += $item->price * $item->count;
+        }
+        if ($this->taxIncluded) {
+            $sum = $sum / (100 + $this->tax) * 100;
+        }
+        return round($sum, 2);
     }
 
-    public function getTotal() {
+    public function getTotal()
+    {
         return $this->dutyFreeTotal + $this->taxes;
     }
 
-    public function getTaxes() {
+    public function getTaxes()
+    {
         if ($this->tax > 0) {
-            return round($this->dutyFreeTotal * $this->tax / 100,2);
+            $sum = 0;
+            foreach ($this->items as $item) {
+                $sum += $item->price * $item->count;
+            }
+            if ($this->taxIncluded) {
+                $taxes = $sum / (100 + $this->tax) * $this->tax;
+            } else {
+                $taxes = $sum * $this->tax / 100;
+            }
+            return round($taxes);
         }
         return 0;
     }
 
 
-    public function getSum() {
+    public function getSum()
+    {
         return Yii::$app->formatter->asCurrency($this->total);
     }
 
-    public function getAmount() {
+    public function getAmount()
+    {
         $amount = 0;
-        foreach ($this->items as $item) $amount += $item->count;
+        foreach ($this->items as $item) {
+            $amount += $item->count;
+        }
         return $amount;
     }
 
