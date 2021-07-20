@@ -75,7 +75,7 @@ $this->params['breadcrumbs'][] = 'Заказ #' . $model->id;
         <ul class="uk-list uk-list-striped">
             <?php foreach ($model->jsonParams as $param): ?>
             <?php if (!empty($model->{$param})): ?>
-            <li><strong><?= $model->getAttributeLabel($param) ?></strong>: <?= $model->{$param} ?>
+            <li><strong><?= $model->getAttributeLabel($param) ?></strong>: <?= Html::encode($model->{$param}) ?>
                 <?php endif ?>
                 <?php endforeach ?>
         </ul>
